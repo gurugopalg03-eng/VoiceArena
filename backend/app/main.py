@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from app.db.database import Base, engine
+import app.models
 
 from app.api.participant import router as participant_router
 from app.api.competition import router as competition_router
@@ -7,6 +9,8 @@ from app.api.user import router as user_router
 from app.api.auth import router as auth_router
 
 app = FastAPI(title="Voice Arena API")
+
+Base.metadata.create_all(bind=engine)
 
 app.include_router(participant_router)
 app.include_router(competition_router)
