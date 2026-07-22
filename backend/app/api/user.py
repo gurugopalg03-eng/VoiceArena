@@ -18,13 +18,17 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.get("/", response_model=list[UserResponse])
 def get_users(
-    current_user=Depends(get_current_user),
+    current_user=Depends(require_admin),
     db: Session = Depends(get_db),
 ):
     return get_all_users(db)
 
 @router.get("/{user_id}", response_model=UserResponse)
-def get_user(user_id: int, db: Session = Depends(get_db)):
+def get_user(
+    user_id: int,
+    current_user=Depends(require_admin),
+    db: Session = Depends(get_db),
+):
     try:
         return get_user_by_id(db, user_id)
     except ValueError as ex:
@@ -48,6 +52,7 @@ def create_user(
 def update_user(
     user_id: int,
     user: UserUpdate,
+    current_user=Depends(require_admin),
     db: Session = Depends(get_db),
 ):
     try:
@@ -57,7 +62,11 @@ def update_user(
 
 
 @router.delete("/{user_id}")
-def delete_user(user_id: int, db: Session = Depends(get_db)):
+def delete_user(
+    user_id: int,
+    current_user=Depends(require_admin),
+    db: Session = Depends(get_db),
+):
     try:
         delete_existing_user(db, user_id)
         return {"message": "User deleted successfully"}
