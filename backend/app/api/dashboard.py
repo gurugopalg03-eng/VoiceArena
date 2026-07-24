@@ -1,4 +1,12 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.db.session import get_db
+
+from app.models.participant import Participant
+from app.models.competition import Competition
+from app.models.organization import Organization
+from app.models.user import User
 
 router = APIRouter(
     prefix="/dashboard",
@@ -7,11 +15,15 @@ router = APIRouter(
 
 
 @router.get("/summary")
-def get_dashboard_summary():
+def get_dashboard_summary(db: Session = Depends(get_db)):
+    participants = db.query(Participant).count()
+    competitions = db.query(Competition).count()
+    organizations = db.query(Organization).count()
+    users = db.query(User).count()
+
     return {
-        "participants": 0,
-        "competitions": 0,
-        "organizations": 0,
-        "users": 0,
+        "participants": participants,
+        "competitions": competitions,
+        "organizations": organizations,
+        "users": users,
     }
-    
