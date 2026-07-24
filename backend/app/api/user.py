@@ -38,7 +38,6 @@ def get_user(
 @router.post("/", response_model=UserResponse, status_code=201)
 def create_user(
     user: UserCreate,
-    current_user=Depends(require_admin),
     db: Session = Depends(get_db),
 ):
     try:

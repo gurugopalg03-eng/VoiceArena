@@ -1,9 +1,9 @@
-from app.core.security import( 
-get_password_hash,
-verify_password
-)
-
 from sqlalchemy.orm import Session
+
+from app.core.security import (
+    get_password_hash,
+    verify_password,
+)
 
 from app.crud.user import (
     create_user,
@@ -48,6 +48,7 @@ def update_existing_user(db: Session, user_id: int, user: UserUpdate):
         raise ValueError("User not found")
 
     return update_user(db, db_user, user)
+
 
 def delete_existing_user(db: Session, user_id: int):
     db_user = get_user(db, user_id)
