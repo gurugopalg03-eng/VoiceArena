@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import DashboardCard from "../../components/DashboardCard/DashboardCard";
 
 function Dashboard() {
   return (
@@ -11,17 +12,35 @@ function Dashboard() {
         <Sidebar />
 
         <Box sx={{ flexGrow: 1, p: 4 }}>
-          <Typography variant="h3" gutterBottom>
-            🎙 VoiceArena Dashboard
-          </Typography>
+          <Grid container spacing={3}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <DashboardCard
+                title="Participants"
+                value="0"
+              />
+            </Grid>
 
-          <Typography variant="h6">
-            Welcome to VoiceArena!
-          </Typography>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <DashboardCard
+                title="Competitions"
+                value="0"
+              />
+            </Grid>
 
-          <Typography sx={{ mt: 2 }}>
-            Login Successful ✅
-          </Typography>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <DashboardCard
+                title="Organizations"
+                value="0"
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <DashboardCard
+                title="Users"
+                value="0"
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </>
