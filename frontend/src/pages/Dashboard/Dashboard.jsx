@@ -1,20 +1,30 @@
-import { Typography, Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 function Dashboard() {
   return (
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h3" gutterBottom>
-        🎙 VoiceArena Dashboard
-      </Typography>
+    <>
+      <Header />
 
-      <Typography variant="h6">
-        Welcome to VoiceArena!
-      </Typography>
+      <Box sx={{ display: "flex" }}>
+        <Sidebar />
 
-      <Typography sx={{ mt: 2 }}>
-        Login Successful ✅
-      </Typography>
-    </Box>
+        <Box sx={{ flexGrow: 1, p: 4 }}>
+          <Typography variant="h3" gutterBottom>
+            🎙 VoiceArena Dashboard
+          </Typography>
+
+          <Typography variant="h6">
+            Welcome to VoiceArena!
+          </Typography>
+
+          <Typography sx={{ mt: 2 }}>
+            Login Successful ✅
+          </Typography>
+        </Box>
+      </Box>
+    </>
   );
 }
 
